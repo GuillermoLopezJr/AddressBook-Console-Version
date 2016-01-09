@@ -18,14 +18,14 @@ public class AddressBook{
 
 	public boolean isEmpty()
 	{
-		return (numOfContacts == 0);
+		return (contacts.size() == 0);
 	}
 
 	public void viewContacts()
 	{
 		for(int i = 0; i < contacts.size() ; i++)
 		{
-			System.out.println("Contact " + i + ":");
+			System.out.println("Contact " + (i+1) + ":");
 			System.out.println(contacts.get(i));
 			System.out.println();
 		}
@@ -45,6 +45,13 @@ public class AddressBook{
 
 	public void removeContact(Contact contact)
 	{
-		contacts.remove(contact);
+		for(int i = 0; i < contacts.size(); i++)
+		{		
+			if(contacts.get(i).equals(contact) )
+			{
+				contacts.remove(i);
+				return;
+			}
+		}	
 	}
 }

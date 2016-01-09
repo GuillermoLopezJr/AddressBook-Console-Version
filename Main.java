@@ -1,8 +1,15 @@
 import java.util.Scanner;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.File;
+ 
 
 public class Main{
+
 	public static void main(String[] args)
 	{
+		//loadData();
+
 		AddressBook book = new AddressBook();
 		int choice = -1;
 		
@@ -38,6 +45,49 @@ public class Main{
 		while(choice != 6);
 	}
 
+	public static void loadData()
+	{
+		Scanner in;
+		String path = "test.txt";
+		
+		try{
+			System.err.println("here 1");
+			
+			File file = new File(path);
+			System.err.println("here 2");
+
+			if(file.exists() )
+			{
+				System.err.println("here 2");
+				in = new Scanner(new FileReader(file));
+
+				System.err.println("here 2");
+				while(in.hasNext() )
+				{	
+					System.out.println(in.next());
+				}
+			}
+			else
+				createFile(path);
+			
+		}
+		catch(FileNotFoundException ex)
+		{
+			System.err.println("File does not exist");
+			createFile(path);
+		}
+		catch(Exception ex)
+		{
+			System.err.println("An error occured while reading");
+		}
+	
+
+	}
+
+	public static void createFile(String path)
+	{
+
+	}
 	public static void editContact()
 	{
 
@@ -47,7 +97,7 @@ public class Main{
 	{
 		Scanner keyboard = new Scanner(System.in);
 
-		System.out.print("First Name:");
+		System.out.print("\nFirst Name: ");
 		String fName = keyboard.nextLine();
 		
 		System.out.print("Last Name: ");

@@ -6,6 +6,7 @@ public class Contact{
 
 	private final String NAME_NOT_PROVIDED = "";
 	private final int NUMBER_NOT_PROVIDED = -1;
+
 	public Contact()
 	{
 		fName = NAME_NOT_PROVIDED;
@@ -54,9 +55,17 @@ public class Contact{
 	{
 		return cellPhone;
 	}
+
 	public int getHousePhone()
 	{
 		return housePhone;
+	}
+
+	public boolean equals(Contact contact)
+	{
+		return(this.getFirstName().equals(contact.getFirstName()) &&
+			this.getLastName().equals(contact.getLastName()) &&
+			this.getCellPhone() == contact.getCellPhone() );
 	}
 
 	public String toString()
@@ -66,7 +75,7 @@ public class Contact{
 		if(!fName.equals(NAME_NOT_PROVIDED))
 			contactInfo += "First Name: " + fName;
 		if(!lName.equals(NAME_NOT_PROVIDED))
-			contactInfo += "\nLast Name: " + lName;
+			contactInfo += "\nLast Name:  " + lName;
 		if(cellPhone != NUMBER_NOT_PROVIDED)
 			contactInfo += "\nCell Phone: " + cellPhone;
 		if(housePhone != NUMBER_NOT_PROVIDED)
