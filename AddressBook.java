@@ -21,38 +21,30 @@ public class AddressBook{
 		return (numOfContacts == 0);
 	}
 
-	public void viewAddressBook()
+	public void viewContacts()
 	{
 		for(int i = 0; i < contacts.size() ; i++)
 		{
+			System.out.println("Contact " + i + ":");
 			System.out.println(contacts.get(i));
 			System.out.println();
 		}
 	}
 
+	public void eraseBook()
+	{
+		for(int i = 0; i < contacts.size(); i++)
+			contacts.remove(i);
+	}
+
 	public void addContact(Contact contact)
 	{
-		contacts.add(contact)
+		contacts.add(contact);
 		numOfContacts++;
 	}
 
-	public void deleteContact(Contact contact)
+	public void removeContact(Contact contact)
 	{
-
-		remove(contact);
-		/*
-		int index = -1;
-
-		for(int i = 0; i < contacts.size(); i++)
-		{
-			if(contacts.get(i) == contact)
-			{
-				index = i;
-			}
-		}
-
-		remove(index);
-	*/
-
+		contacts.remove(contact);
 	}
 }
