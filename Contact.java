@@ -15,10 +15,19 @@ public class Contact{
 		housePhone = NUMBER_NOT_PROVIDED;
 	}
 
-	public Contact(String fname, String lname)
+	public Contact (String fName, String lName, int cellPhone, int housePhone)
 	{
 		this.fName = fName;
 		this.lName = lName;
+		this.cellPhone = cellPhone;
+		this.housePhone = housePhone;
+	}
+
+	public Contact (String fName, String lName, int cellPhone)
+	{
+		this.fName = fName;
+		this.lName = lName;
+		this.cellPhone = cellPhone;
 	}
 
 	public void setFirstName(String fName)
