@@ -14,14 +14,13 @@ public class Main{
 		AddressBook book = new AddressBook(path);
 
 		boolean dataLoaded = book.loadData();
-		if(!dataLoaded)
-			createFile(path);
 		int choice = -1;
 		
 		do{
 			printMenu();
 			choice = getChoice();
 			Contact contact;
+
 			switch(choice)
 			{
 				case 1:
@@ -38,13 +37,15 @@ public class Main{
 					System.out.println("Removing...\n");
 					break;
 				case 4:
-					editContact();
+					editContact(book);
 					break;
 				case 5:
+					System.out.println("Erasing Address Book");
 					book.eraseBook();
 					break;
 				case 6:
-					//book.save(path);
+					System.out.println("Saving...");
+					book.save();
 					break;
 				case 7:
 					break;
@@ -54,57 +55,6 @@ public class Main{
 			}
 		}
 		while(choice != 7);
-	}
-
-	public static void save(String path) //make  this addressbook method.
-	{
-
-	}
-
-	public static boolean loadData(AddressBook book) //make this a method.
-	{
-		Scanner in;
-		String path = "test.txt";
-		boolean dataLoaded = false;
-
-		try{
-			
-			File file = new File(path);
-
-			if(file.exists() )
-			{
-				in = new Scanner(new FileReader(file));
-
-				while(in.hasNext() )
-				{	
-					String fName = in.next();
-					String lName = in.next();
-					int cellPhone = in.nextInt();
-					//int housePhone = in.nextInt();
-					Contact contact = new Contact(fName, lName, cellPhone);
-					System.out.println(contact + "\n");
-					book.addContact(contact);
-					
-				}
-				in.close();
-				dataLoaded = true;
-			}
-		}
-
-		catch(FileNotFoundException ex)
-		{
-			System.err.println("File does not exist");
-			createFile(path);
-		}
-		catch(Exception ex)
-		{
-			System.err.println("An error occured while reading");
-			dataLoaded = false;
-		}
-
-		return dataLoaded;
-	
-
 	}
 
 	public static void createFile(String path)
@@ -119,9 +69,15 @@ public class Main{
 			System.err.println("An error occured while writing");
 		}
 	}
-	public static void editContact()
-	{
 
+	public static void editContact(AddressBook book)
+	{
+		System.out.print("Enter index of contact you wish to edit: ");
+		int index = getChoice();
+
+		Contact contact = getContactInfo();
+		book.editContact(index-1, contact);
+		System.out.println();
 	}
 
 	public static Contact getContactInfo()
@@ -135,12 +91,16 @@ public class Main{
 		String lName = keyboard.nextLine();
 
 		System.out.print("Cell Phone: ");
-		int cellPhone = keyboard.nextInt();
+		long cellPhone = keyboard.nextLong();
+
+		System.out.print("House Phone: ");
+		long housePhone = keyboard.nextLong();
 
 		Contact contact = new Contact();
 		contact.setFirstName(fName);
 		contact.setLastName(lName);
 		contact.setCellPhone(cellPhone);
+		contact.setHousePhone(housePhone);
 
 		return contact;
 	}

@@ -2,10 +2,10 @@
 public class Contact{
 
 	private String fName, lName;
-	private int cellPhone, housePhone;
+	private long cellPhone, housePhone;
 
 	private final String NAME_NOT_PROVIDED = "";
-	private final int NUMBER_NOT_PROVIDED = -1;
+	private final int NUMBER_NOT_PROVIDED = -1; //long int is the same as long
 
 	public Contact()
 	{
@@ -15,7 +15,7 @@ public class Contact{
 		housePhone = NUMBER_NOT_PROVIDED;
 	}
 
-	public Contact (String fName, String lName, int cellPhone, int housePhone)
+	public Contact (String fName, String lName, long cellPhone, long housePhone)
 	{
 		this.fName = fName;
 		this.lName = lName;
@@ -23,7 +23,7 @@ public class Contact{
 		this.housePhone = housePhone;
 	}
 
-	public Contact (String fName, String lName, int cellPhone)
+	public Contact (String fName, String lName, long cellPhone)
 	{
 		this.fName = fName;
 		this.lName = lName;
@@ -40,12 +40,12 @@ public class Contact{
 		this.lName = lName;
 	}
 
-	public void setCellPhone(int num)
+	public void setCellPhone(long num)
 	{
 		cellPhone = num;
 	}
 
-	public void setHousePhone(int num)
+	public void setHousePhone(long num)
 	{
 		housePhone = num;
 	}
@@ -60,12 +60,12 @@ public class Contact{
 		return lName;
 	}
 
-	public int getCellPhone()
+	public long getCellPhone()
 	{
 		return cellPhone;
 	}
 
-	public int getHousePhone()
+	public long getHousePhone()
 	{
 		return housePhone;
 	}
@@ -88,7 +88,7 @@ public class Contact{
 		if(cellPhone != NUMBER_NOT_PROVIDED)
 			contactInfo += "\nCell Phone: " + cellPhone;
 		if(housePhone != NUMBER_NOT_PROVIDED)
-			contactInfo += "House Phone: " + housePhone;
+			contactInfo += "\nHouse Phone: " + housePhone;
 
 		return contactInfo;
 	}

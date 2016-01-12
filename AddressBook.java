@@ -10,12 +10,10 @@ public class AddressBook{
 
 	private int numOfContacts;
 	private ArrayList<Contact> contacts = new ArrayList<Contact>();
+	
 	String path = "";
 
-	public AddressBook()
-	{
-
-	}
+	public AddressBook(){}
 
 	public AddressBook(String path)
 	{
@@ -49,26 +47,34 @@ public class AddressBook{
 		numOfContacts++;
 	}
 
-	public void setDirectory(String path)
+	public void setPath(String path)
 	{
 		this.path = path;
 	}
+
+	//index of contact to be edited/replaced.
+	public void editContact(int index, Contact contact)
+	{
+		contacts.set(index, contact);
+
+	}
+
 	public void save()
 	{
-
-		if(!path.equals(""))
-		{
-			try{
-				PrintWriter f = new PrintWriter(new FileWriter(path));
-				f.println("");
-				f.close();
-			}catch(Exception ex)
+		try{
+			PrintWriter f = new PrintWriter(new FileWriter(path));
+			for(int i = 0; i < contacts.size(); i++)
 			{
-				System.err.println("An error occured while writing");
+				f.println(contacts.get(i).getFirstName());
+				f.println(contacts.get(i).getLastName());
+				f.println(contacts.get(i).getCellPhone());
+				f.println(contacts.get(i).getHousePhone());
 			}
+			f.close();
+		}catch(Exception ex)
+		{
+			System.err.println("An error occured while writing");
 		}
-		else
-			System.out.println("NO path spectified");
 
 	}
 
@@ -76,6 +82,7 @@ public class AddressBook{
 	{
 		Scanner in;
 		boolean dataLoaded = false;
+		System.out.println("Loading data...");
 
 		try{
 			File file = new File(path);
@@ -88,9 +95,9 @@ public class AddressBook{
 				{	
 					String fName = in.next();
 					String lName = in.next();
-					int cellPhone = in.nextInt();
-					//int housePhone = in.nextInt();
-					Contact contact = new Contact(fName, lName, cellPhone);
+					long cellPhone = in.nextLong();
+					long housePhone = in.nextLong();
+					Contact contact = new Contact(fName, lName, cellPhone, housePhone);
 					addContact(contact);
 				}
 
@@ -102,7 +109,7 @@ public class AddressBook{
 		{
 			System.err.println("File does not exist");
 			dataLoaded = false;
-			save(); //saveing an empty file. 
+			//save(); //saveing an empty file. 
 		}
 		catch(Exception ex)
 		{
