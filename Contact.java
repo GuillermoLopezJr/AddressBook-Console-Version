@@ -4,8 +4,8 @@ public class Contact{
 	private String fName, lName;
 	private long cellPhone, housePhone;
 
-	private final String NAME_NOT_PROVIDED = "";
-	private final int NUMBER_NOT_PROVIDED = -1; //long int is the same as long
+	private final String NAME_NOT_PROVIDED = "-1";
+	private final int NUMBER_NOT_PROVIDED = -1;
 
 	public Contact()
 	{

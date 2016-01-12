@@ -21,7 +21,7 @@ public class Main{
 					book.viewContacts();
 					break;
 				case 2:
-					System.out.println("leave empty name field not applicable.");
+					//System.out.println("leave empty name field not applicable.");
 					System.out.println("Type -1 if number field not applicable.\n");
 					contact = getContactInfo();
 					book.addContact(contact);
