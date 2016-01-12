@@ -10,13 +10,13 @@ public class Main{
 
 	public static void main(String[] args)
 	{
-		
-
-		AddressBook book = new AddressBook();
-
-		boolean dataLoaded = loadData(book);
-		int choice = -1;
 		String path = "test.txt";
+		AddressBook book = new AddressBook(path);
+
+		boolean dataLoaded = book.loadData();
+		if(!dataLoaded)
+			createFile(path);
+		int choice = -1;
 		
 		do{
 			printMenu();
@@ -90,6 +90,7 @@ public class Main{
 				dataLoaded = true;
 			}
 		}
+
 		catch(FileNotFoundException ex)
 		{
 			System.err.println("File does not exist");
@@ -98,6 +99,7 @@ public class Main{
 		catch(Exception ex)
 		{
 			System.err.println("An error occured while reading");
+			dataLoaded = false;
 		}
 
 		return dataLoaded;

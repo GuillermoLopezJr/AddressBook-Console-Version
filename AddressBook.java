@@ -1,10 +1,16 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.FileWriter;
 
 public class AddressBook{
 
 	private int numOfContacts;
 	private ArrayList<Contact> contacts = new ArrayList<Contact>();
-
+	String path = "";
 
 	public AddressBook()
 	{
@@ -13,7 +19,7 @@ public class AddressBook{
 
 	public AddressBook(String path)
 	{
-
+		this.path = path;
 	}
 
 	public boolean isEmpty()
@@ -41,6 +47,70 @@ public class AddressBook{
 	{
 		contacts.add(contact);
 		numOfContacts++;
+	}
+
+	public void setDirectory(String path)
+	{
+		this.path = path;
+	}
+	public void save()
+	{
+
+		if(!path.equals(""))
+		{
+			try{
+				PrintWriter f = new PrintWriter(new FileWriter(path));
+				f.println("");
+				f.close();
+			}catch(Exception ex)
+			{
+				System.err.println("An error occured while writing");
+			}
+		}
+		else
+			System.out.println("NO path spectified");
+
+	}
+
+	public boolean loadData()
+	{
+		Scanner in;
+		boolean dataLoaded = false;
+
+		try{
+			File file = new File(path);
+
+			if(file.exists() )
+			{
+				in = new Scanner(new FileReader(file));
+
+				while(in.hasNext() )
+				{	
+					String fName = in.next();
+					String lName = in.next();
+					int cellPhone = in.nextInt();
+					//int housePhone = in.nextInt();
+					Contact contact = new Contact(fName, lName, cellPhone);
+					addContact(contact);
+				}
+
+				in.close();
+				dataLoaded = true;
+			}
+		}
+		catch(FileNotFoundException ex)
+		{
+			System.err.println("File does not exist");
+			dataLoaded = false;
+			save(); //saveing an empty file. 
+		}
+		catch(Exception ex)
+		{
+			dataLoaded = false;
+			System.err.println("An error occured while reading");
+		}
+
+		return dataLoaded;
 	}
 
 	public void removeContact(Contact contact)
