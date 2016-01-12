@@ -56,7 +56,6 @@ public class AddressBook{
 	public void editContact(int index, Contact contact)
 	{
 		contacts.set(index, contact);
-
 	}
 
 	public void save()
@@ -75,7 +74,6 @@ public class AddressBook{
 		{
 			System.err.println("An error occured while writing");
 		}
-
 	}
 
 	public boolean loadData()
@@ -120,15 +118,29 @@ public class AddressBook{
 		return dataLoaded;
 	}
 
-	public void removeContact(Contact contact)
+	//returns true if contact was removed false otherwise.
+	public boolean removeContact(Contact contact)
 	{
 		for(int i = 0; i < contacts.size(); i++)
 		{		
 			if(contacts.get(i).equals(contact) )
 			{
 				contacts.remove(i);
-				return;
+				return true;
 			}
-		}	
+		}
+		return false;	
+	}
+
+	public String toString()
+	{
+		String info = "";
+		for(int i = 0; i < contacts.size() ; i++)
+		{
+			info += "Contact " + (i+1) + ":";
+			info += contacts.get(i);
+			info += "\n";
+		}
+		return info;
 	}
 }

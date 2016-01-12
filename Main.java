@@ -1,10 +1,4 @@
 import java.util.Scanner;
-import java.io.FileReader;
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-
 
 public class Main{
 
@@ -27,24 +21,24 @@ public class Main{
 					book.viewContacts();
 					break;
 				case 2:
+					System.out.println("leave empty name field not applicable.");
+					System.out.println("Type -1 if number field not applicable.\n");
 					contact = getContactInfo();
 					book.addContact(contact);
 					System.out.println("Adding...\n");
 					break;
 				case 3:
-					contact = getContactInfo();
-					book.removeContact(contact);
-					System.out.println("Removing...\n");
+					removeContact(book);	
 					break;
 				case 4:
 					editContact(book);
 					break;
 				case 5:
-					System.out.println("Erasing Address Book");
+					System.out.println("Erasing Address Book...\n");
 					book.eraseBook();
 					break;
 				case 6:
-					System.out.println("Saving...");
+					System.out.println("Saving...\n");
 					book.save();
 					break;
 				case 7:
@@ -57,17 +51,14 @@ public class Main{
 		while(choice != 7);
 	}
 
-	public static void createFile(String path)
+	public static void removeContact(AddressBook book)
 	{
-
-		try{
-			PrintWriter f = new PrintWriter(new FileWriter(path));
-			f.println("i am cool");
-			f.close();
-		}catch(Exception ex)
-		{
-			System.err.println("An error occured while writing");
-		}
+		Contact contact = getContactInfo();
+		boolean removed = book.removeContact(contact);
+		if(removed)
+			System.out.println("\nRemoving...\n");
+		else 
+			System.out.println("\nContact not found...\n");
 	}
 
 	public static void editContact(AddressBook book)
@@ -97,6 +88,7 @@ public class Main{
 		long housePhone = keyboard.nextLong();
 
 		Contact contact = new Contact();
+
 		contact.setFirstName(fName);
 		contact.setLastName(lName);
 		contact.setCellPhone(cellPhone);
