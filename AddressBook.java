@@ -37,8 +37,10 @@ public class AddressBook{
 
 	public void eraseBook()
 	{
-		for(int i = 0; i < contacts.size(); i++)
+		for(int i = contacts.size()-1; i >= 0; i--)
 			contacts.remove(i);
+
+		numOfContacts = 0;
 	}
 
 	public void addContact(Contact contact)
@@ -80,8 +82,7 @@ public class AddressBook{
 	{
 		Scanner in;
 		boolean dataLoaded = false;
-		System.out.println("Loading data...");
-
+	
 		try{
 			File file = new File(path);
 
@@ -121,11 +122,13 @@ public class AddressBook{
 	//returns true if contact was removed false otherwise.
 	public boolean removeContact(Contact contact)
 	{
+		System.out.println("arr size: " + contacts.size());
 		for(int i = 0; i < contacts.size(); i++)
 		{		
 			if(contacts.get(i).equals(contact) )
 			{
 				contacts.remove(i);
+				numOfContacts--;
 				return true;
 			}
 		}

@@ -13,7 +13,6 @@ public class Main{
 		do{
 			printMenu();
 			choice = getChoice();
-			Contact contact;
 
 			switch(choice)
 			{
@@ -21,11 +20,7 @@ public class Main{
 					book.viewContacts();
 					break;
 				case 2:
-					//System.out.println("leave empty name field not applicable.");
-					System.out.println("Type -1 if number field not applicable.\n");
-					contact = getContactInfo();
-					book.addContact(contact);
-					System.out.println("Adding...\n");
+					addContact(book);
 					break;
 				case 3:
 					removeContact(book);	
@@ -49,6 +44,14 @@ public class Main{
 			}
 		}
 		while(choice != 7);
+	}
+
+	public static void addContact(AddressBook book)
+	{
+		System.out.println("Type -1 if number field not applicable.\n");
+		Contact contact = getContactInfo();
+		book.addContact(contact);
+		System.out.println("Adding...\n");
 	}
 
 	public static void removeContact(AddressBook book)
@@ -87,12 +90,7 @@ public class Main{
 		System.out.print("House Phone: ");
 		long housePhone = keyboard.nextLong();
 
-		Contact contact = new Contact();
-
-		contact.setFirstName(fName);
-		contact.setLastName(lName);
-		contact.setCellPhone(cellPhone);
-		contact.setHousePhone(housePhone);
+		Contact contact = new Contact(fName, lName, cellPhone, housePhone);
 
 		return contact;
 	}

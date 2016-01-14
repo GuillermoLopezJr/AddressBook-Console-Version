@@ -23,13 +23,6 @@ public class Contact{
 		this.housePhone = housePhone;
 	}
 
-	public Contact (String fName, String lName, long cellPhone)
-	{
-		this.fName = fName;
-		this.lName = lName;
-		this.cellPhone = cellPhone;
-	}
-
 	public void setFirstName(String fName)
 	{
 		this.fName = fName;
